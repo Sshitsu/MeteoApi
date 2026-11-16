@@ -1,13 +1,15 @@
 package org.example;
 
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Locale;
-import java.util.Objects;
+
 
 public class WeatherApp {
     private static final Object BASE_URL = "https://api.weather.yandex.ru/v2/forecast";
@@ -26,6 +28,13 @@ public class WeatherApp {
         System.out.println("Полный ответ сервиса:");
         System.out.println(body);
 
+        System.out.println();
+        System.out.println(currentTemp());
+
+    }
+
+    private static double currentTemp(JsonObject json) {
+        return json.getAsJsonObject("fact").get("current").getAsDouble();
     }
 
 
